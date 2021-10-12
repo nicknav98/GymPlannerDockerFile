@@ -10,14 +10,14 @@ from models.user import User
 from models.workout import Workout
 from schemas.user import UserSchema
 from schemas.workout import WorkoutSchema
-from mailgun import MailgunApi
+#from mailgun import MailgunApi
 from utils import generate_token, verify_token
 
 user_schema = UserSchema()
 user_public_schema = UserSchema(exclude=('email',))
 workout_list_schema = WorkoutSchema(many=True)
-mailgun = MailgunApi(domain=os.environ['MAILGUN_DOMAIN'],
-                     api_key=os.environ['MAILGUN_API_KEY'])
+#mailgun = MailgunApi(domain=os.environ['MAILGUN_DOMAIN'],
+                     #api_key=os.environ['MAILGUN_API_KEY'])
 
 
 class UserListResource(Resource):
@@ -36,20 +36,20 @@ class UserListResource(Resource):
         user = User(**data)
         user.save()
 
-        token = generate_token(user.email, salt='activate')
+        # token = generate_token(user.email, salt='activate')
 
-        subject = 'Please confirm your registration.'
+        # subject = 'Please confirm your registration.'
 
-        link = url_for('useractivateresource',
-                       token=token,
-                       _external=True)
+        # link = url_for('useractivateresource',
+                       #token=token,
+                      # _external=True)
 
-        text = 'Hi, Thanks for using Gym-Planner! Please confirm your registration by clicking on the link: {}'.format(
-            link)
+        # text = 'Hi, Thanks for using Gym-Planner! Please confirm your registration by clicking on the link: {}'.format(
+            #link)
 
-        mailgun.send_email(to=user.email,
-                           subject=subject,
-                           text=text)
+        # mailgun.send_email(to=user.email,
+                           #subject=subject,
+                           #text=text)
 
         return user_schema.dump(user).data, HTTPStatus.CREATED
 
