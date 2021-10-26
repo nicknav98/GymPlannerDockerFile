@@ -8,15 +8,14 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_USER=admin
   pgadmin:
-    image: pgadmin
+    image: dpage/pgadmin4
     ports:
       - '8080:8080'
     environment:
       - PGADMIN_DEFAULT_EMAIL=user@domain.com
       - PGADMIN_DEFAULT_PASSWORD=password
       - PGADMIN_LISTEN_PORT=5432
-  python3:
-    image: python:3-alpine3.14
+
 
 
 
