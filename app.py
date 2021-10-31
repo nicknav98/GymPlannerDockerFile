@@ -2,6 +2,7 @@ from flask import Flask
 from flask_migrate import Migrate
 from flask_restful import Api
 
+
 from Config import Config
 
 from extensions import db, jwt
@@ -11,8 +12,10 @@ from resources.token import TokenResource, RefreshResource, RevokeResource, blac
 from resources.user import UserListResource, UserResource, MeResource, UserWorkoutListResource, UserActivateResource
 
 
+
 def create_app():
     app = Flask(__name__)
+    db.init_app(app)
     app.config.from_object(Config)
 
     register_extensions(app)

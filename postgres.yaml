@@ -2,8 +2,9 @@ version: '3'
 services:
   postgres:
     image: postgres:14-alpine
+    restart: always
     ports:
-      - '5432:5432'
+      - '5446:5432'
     environment:
       - POSTGRES_PASSWORD=password
       - POSTGRES_USER=admin
@@ -12,12 +13,17 @@ services:
 
   pgadmin:
     image: dpage/pgadmin4
+    depends_on:
+      - postgres
+    restart: always
     ports:
       - '5555:80'
     environment:
       - PGADMIN_DEFAULT_EMAIL=user@domain.com
       - PGADMIN_DEFAULT_PASSWORD=password
-      - PGADMIN_LISTEN_PORT=5432
+
+
+
 
 
 
