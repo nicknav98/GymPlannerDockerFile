@@ -1,7 +1,7 @@
 version: '3'
 services:
   postgres:
-    image: postgres:14-alpine
+    image: postgres:14
     restart: always
     ports:
       - '5446:5432'
@@ -9,6 +9,7 @@ services:
       - POSTGRES_PASSWORD=password
       - POSTGRES_USER=admin
       - POSTGRES_DB=WorkoutsDB
+
 
 
   pgadmin:
@@ -22,12 +23,8 @@ services:
       - PGADMIN_DEFAULT_EMAIL=user@domain.com
       - PGADMIN_DEFAULT_PASSWORD=password
 
-
-
-
-
-
-
-
-
-
+  app:
+    image: gymplanner:0.0
+    restart: always
+    ports:
+      - '5050:5050'
