@@ -1,4 +1,4 @@
-FROM python:3.7-slim-buster
+FROM --platform=linux/amd64 python:3.7-slim-buster
 
 RUN mkdir home/app && \
     apt-get update && \
@@ -9,9 +9,10 @@ RUN mkdir home/app && \
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-COPY . /home/app
-
-
 EXPOSE 5050
 
-ENTRYPOINT ["tail", "-f", "/dev/null"]
+COPY . /home/app
+ADD start.sh /
+
+RUN chmod +x start.sh
+CMD ["/start.sh"]
