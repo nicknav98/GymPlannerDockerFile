@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   annotations:
-    kompose.cmd: kompose convert --volumes hostPath
+    kompose.cmd: kompose convert
     kompose.version: 1.25.0 (HEAD)
   creationTimestamp: null
   labels:
@@ -18,7 +18,7 @@ spec:
   template:
     metadata:
       annotations:
-        kompose.cmd: kompose convert --volumes hostPath
+        kompose.cmd: kompose convert
         kompose.version: 1.25.0 (HEAD)
       creationTimestamp: null
       labels:
@@ -39,10 +39,10 @@ spec:
           resources: {}
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
-              name: postgres-hostpath0
+              name: postgres-claim0
       restartPolicy: Always
       volumes:
-        - hostPath:
-            path: /Users/nicknav98/Programming/Gym-Planner/postgres_data
-          name: postgres-hostpath0
+        - name: postgres-claim0
+          persistentVolumeClaim:
+            claimName: postgres-claim0
 status: {}
